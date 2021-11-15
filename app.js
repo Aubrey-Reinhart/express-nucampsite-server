@@ -10,8 +10,6 @@ const campsiteRouter = require('./routes/campsiteRouter');
 const promotionRouter = require('./routes/promotionRouter');
 const partnerRouter = require('./routes/partnerRouter');
 
-const app = express();
-
 const mongoose = require('mongoose');
 
 const url = 'mongodb://localhost:27017/nucampsite';
@@ -26,6 +24,7 @@ connect.then(() => console.log('Connected correctly to server'),
     err => console.log(err)
 );
 
+const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
