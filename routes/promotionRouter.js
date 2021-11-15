@@ -1,4 +1,6 @@
 const express = require('express');
+const Promotion = require('../models/promotion');
+
 const promotionRouter = express.Router();
 
 //promotionRouter with base /promotion ------
