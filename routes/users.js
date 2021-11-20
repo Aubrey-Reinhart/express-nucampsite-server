@@ -9,7 +9,13 @@ const router = express.Router();
 router.route('/')
 //it first checks the user, then it checks the admin. If you pass admin then you can access res.send
 .get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    res.send('respond with a resource');
+    User.find()
+    .then(users => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(users);
+    })
+    .catch(err => next(err));
 });
 
 router.post('/signup', (req, res) => {
