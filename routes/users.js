@@ -6,7 +6,9 @@ const authenticate = require('../authenticate');
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.route('/')
+//it first checks the user, then it checks the admin. If you pass admin then you can access res.send
+.get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     res.send('respond with a resource');
 });
 
@@ -51,6 +53,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     res.json({success: true, token: token, status: 'You are successfully logged in!'});
 });
 
+//check logout method. It doesnt allow users to logout
 router.get('/logout', (req, res, next) => {
     if (req.session) {
         req.session.destroy();
