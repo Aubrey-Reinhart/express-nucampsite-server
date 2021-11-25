@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('./cors');
 const User = require('../models/user');
 const passport = require('passport');
 const authenticate = require('../authenticate');
@@ -8,7 +9,7 @@ const router = express.Router();
 /* GET users listing. */
 router.route('/')
 //it first checks the user, then it checks the admin. If you pass admin then you can access res.send
-.get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+.get(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     User.find()
     .then(users => {
         res.statusCode = 200;
